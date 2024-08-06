@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "BaseRepo"
 include(":sampleApp")
- 
+include(":core")
