@@ -28,7 +28,7 @@ fun createHttpClient(
             )
         }
 
-        // TODO
+        // TODO https://ktor.io/docs/client-bearer-auth.html
 //        install(Auth){
 //            bearer{
 //                loadToken{}
