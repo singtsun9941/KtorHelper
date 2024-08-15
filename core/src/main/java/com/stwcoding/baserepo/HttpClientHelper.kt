@@ -10,33 +10,39 @@ import kotlinx.serialization.SerializationException
 import java.nio.channels.UnresolvedAddressException
 
 abstract class HttpClientHelper(
-    private val httpClient: HttpClient,
+    protected val httpClient: HttpClient,
+    protected val getRequestBuilder: HttpRequestBuilder.() -> Unit = {},
+    protected val postRequestBuilder: HttpRequestBuilder.() -> Unit = {}
 ) {
-    open suspend fun get(
+    protected suspend inline fun <reified T> get(
         path: String,
         block: HttpRequestBuilder.() -> Unit = {}
-    ): Result<String> =
+    ): Result<T> =
         requestHelper(
             httpMethod = HttpMethod.Get,
             path = path,
-            block = block,
-        )
+        ) {
+            getRequestBuilder()
+            block()
+        }
 
-    open suspend fun post(
+    protected suspend inline fun <reified T> post(
         path: String,
         block: HttpRequestBuilder.() -> Unit = {}
-    ): Result<String> =
+    ): Result<T> =
         requestHelper(
             httpMethod = HttpMethod.Post,
             path = path,
-            block = block,
-        )
+        ) {
+            postRequestBuilder()
+            block()
+        }
 
-    private suspend fun requestHelper(
+    protected suspend inline fun <reified T> requestHelper(
         httpMethod: HttpMethod,
         path: String,
         block: HttpRequestBuilder.() -> Unit = {}
-    ): Result<String> {
+    ): Result<T> {
         val response = try {
             httpClient.request(path) {
                 method = httpMethod
@@ -50,8 +56,8 @@ abstract class HttpClientHelper(
 
         return when (response.status.value) {
             in 200..299 -> {
-                val censoredText = response.body<String>()
-                Result.success(censoredText)
+                val responseBody = response.body<T>()
+                Result.success(responseBody)
             }
 
             401 -> Result.failure(NetworkError.UNAUTHORIZED())
