@@ -54,7 +54,7 @@ abstract class HttpClientHelper(
             return Result.failure(NetworkError.SERIALIZATION())
         }
 
-        return when (response.status.value) {
+        return when (val statusCode = response.status.value) {
             in 200..299 -> {
                 val responseBody = response.body<T>()
                 Result.success(responseBody)
@@ -64,7 +64,7 @@ abstract class HttpClientHelper(
             409 -> Result.failure(NetworkError.CONFLICT())
             408 -> Result.failure(NetworkError.REQUEST_TIMEOUT())
             413 -> Result.failure(NetworkError.PAYLOAD_TOO_LARGE())
-            in 500..599 -> Result.failure(NetworkError.SERVER_ERROR())
+            in 500..599 -> Result.failure(NetworkError.SERVER_ERROR(statusCode))
             else -> Result.failure(NetworkError.UNKNOWN())
         }
     }

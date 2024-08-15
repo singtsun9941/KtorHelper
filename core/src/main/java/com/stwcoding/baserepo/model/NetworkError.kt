@@ -7,7 +7,7 @@ sealed class NetworkError : Error("Network Error") {
     class NO_INTERNET : NetworkError()
     class PAYLOAD_TOO_LARGE : NetworkError()
     class UNAUTHORIZED : NetworkError()
-    data class SERVER_ERROR(val errorCode: String = "") : NetworkError()
+    data class SERVER_ERROR(val errorCode: Int) : NetworkError()
     class SERIALIZATION : NetworkError()
     class UNKNOWN : NetworkError()
 }
