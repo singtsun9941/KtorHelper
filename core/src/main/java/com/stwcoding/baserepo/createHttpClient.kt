@@ -1,6 +1,7 @@
 package com.stwcoding.baserepo
 
 import io.ktor.client.HttpClient
+import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
@@ -12,14 +13,20 @@ import kotlinx.serialization.json.Json
 fun createHttpClient(
     engine: HttpClientEngine,
     domain: String,
+    isShowLog: Boolean = true,
+    config: HttpClientConfig<*>.() -> Unit = {}
 ): HttpClient {
     return HttpClient(engine) {
         defaultRequest {
             url(domain)
         }
-        install(Logging) {
-            level = LogLevel.ALL
+
+        if (isShowLog) {
+            install(Logging) {
+                level = LogLevel.ALL
+            }
         }
+
         install(ContentNegotiation) {
             json(
                 json = Json {
@@ -35,5 +42,7 @@ fun createHttpClient(
 //                refreshTokens{}
 //            }
 //        }
+
+        config()
     }
 }
