@@ -65,7 +65,7 @@ abstract class HttpClientHelper(
             408 -> Result.failure(NetworkError.REQUEST_TIMEOUT())
             413 -> Result.failure(NetworkError.PAYLOAD_TOO_LARGE())
             in 500..599 -> Result.failure(NetworkError.SERVER_ERROR(statusCode))
-            else -> Result.failure(NetworkError.UNKNOWN())
+            else -> Result.failure(NetworkError.UNKNOWN(statusCode))
         }
     }
 }
