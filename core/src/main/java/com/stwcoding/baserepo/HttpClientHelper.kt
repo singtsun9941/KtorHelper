@@ -49,9 +49,9 @@ abstract class HttpClientHelper(
                 block()
             }
         } catch (e: UnresolvedAddressException) {
-            return Result.failure(NetworkError.NO_INTERNET())
+            return Result.failure(NetworkError.NoInternet())
         } catch (e: SerializationException) {
-            return Result.failure(NetworkError.SERIALIZATION())
+            return Result.failure(NetworkError.Serialization())
         }
 
         return when (val statusCode = response.status.value) {
@@ -60,12 +60,12 @@ abstract class HttpClientHelper(
                 Result.success(responseBody)
             }
 
-            401 -> Result.failure(NetworkError.UNAUTHORIZED())
-            409 -> Result.failure(NetworkError.CONFLICT())
-            408 -> Result.failure(NetworkError.REQUEST_TIMEOUT())
-            413 -> Result.failure(NetworkError.PAYLOAD_TOO_LARGE())
-            in 500..599 -> Result.failure(NetworkError.SERVER_ERROR(statusCode))
-            else -> Result.failure(NetworkError.UNKNOWN(statusCode))
+            401 -> Result.failure(NetworkError.Unauthorized())
+            409 -> Result.failure(NetworkError.Conflict())
+            408 -> Result.failure(NetworkError.RequestTimeout())
+            413 -> Result.failure(NetworkError.PayloadTooLarge())
+            in 500..599 -> Result.failure(NetworkError.ServerError(statusCode))
+            else -> Result.failure(NetworkError.Unknown(statusCode))
         }
     }
 }

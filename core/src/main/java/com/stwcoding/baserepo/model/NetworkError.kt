@@ -1,13 +1,12 @@
 package com.stwcoding.baserepo.model
 
-sealed class NetworkError : Error("Network Error") {
-    class REQUEST_TIMEOUT : NetworkError()
-    class TOO_MANY_REQUEST : NetworkError()
-    class CONFLICT : NetworkError()
-    class NO_INTERNET : NetworkError()
-    class PAYLOAD_TOO_LARGE : NetworkError()
-    class UNAUTHORIZED : NetworkError()
-    data class SERVER_ERROR(val stateCode: Int) : NetworkError()
-    class SERIALIZATION : NetworkError()
-    data class UNKNOWN(val stateCode: Int) : NetworkError()
+sealed class NetworkError(errorMsg: String) : Error("Network Error: $errorMsg") {
+    class RequestTimeout : NetworkError("Request timeout")
+    class Conflict : NetworkError("Conflict")
+    class NoInternet : NetworkError("No internet")
+    class PayloadTooLarge : NetworkError("Payload too large")
+    class Unauthorized : NetworkError("Unauthorized")
+    data class ServerError(val stateCode: Int) : NetworkError("Server error")
+    class Serialization : NetworkError("Serialization")
+    data class Unknown(val stateCode: Int) : NetworkError("Unknown")
 }
