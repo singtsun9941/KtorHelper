@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "BaseRepo"
+rootProject.name = "KtorHelper"
 include(":sampleApp")
 include(":core")
