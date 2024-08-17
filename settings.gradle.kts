@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "KtorHelper"
 include(":sampleApp")
-include(":core")
+include(":ktorHelper")
