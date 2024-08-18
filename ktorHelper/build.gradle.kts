@@ -6,7 +6,8 @@ plugins {
 }
 
 java {
-    withSourcesJar()
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 dependencies {
@@ -22,9 +23,10 @@ dependencies {
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
+            from(components["java"])
             groupId = "com.stwcoding"
             artifactId = "ktorhelper"
-            version = "1.0.0"
+            version = "1.0.0-SNAPSHOT"
 
             pom {
                 name = "Ktor Helper"
@@ -52,6 +54,12 @@ publishing {
                 username = System.getenv("GITHUB_USERNAME")
                 password = System.getenv("GITHUB_PUBLISH_TOKEN")
             }
+        }
+    }
+
+    tasks.compileKotlin {
+        kotlinOptions {
+            jvmTarget = "17"
         }
     }
 }
