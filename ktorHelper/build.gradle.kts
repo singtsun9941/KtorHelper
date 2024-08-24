@@ -24,7 +24,7 @@ publishing {
     publications {
         create<MavenPublication>("mavenJava") {
             from(components["java"])
-            groupId = "com.stwcoding"
+            groupId = "com.stwcoding.networkmodule"
             artifactId = "ktorhelper"
             version = "1.0.0-SNAPSHOT"
 
