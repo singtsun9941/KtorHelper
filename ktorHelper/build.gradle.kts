@@ -26,7 +26,7 @@ publishing {
             from(components["java"])
             groupId = "com.stwcoding.networkmodule"
             artifactId = "ktorhelper"
-            version = "1.0.0-SNAPSHOT"
+            version = "1.0.0"
 
             pom {
                 name = "Ktor Helper"
@@ -54,12 +54,6 @@ publishing {
                 username = System.getenv("GITHUB_USERNAME")
                 password = System.getenv("GITHUB_PUBLISH_TOKEN")
             }
-        }
-    }
-
-    tasks.compileKotlin {
-        kotlinOptions {
-            jvmTarget = "17"
         }
     }
 }
