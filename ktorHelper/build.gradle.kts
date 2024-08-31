@@ -48,6 +48,10 @@ publishing {
     }
     repositories {
         maven {
+            url = uri(System.getenv("MY_MAVEN_REPO_PATH"))
+        }
+
+        maven {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/singtsun9941/KtorHelper")
             credentials {
