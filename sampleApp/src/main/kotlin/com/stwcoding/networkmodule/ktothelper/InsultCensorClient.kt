@@ -1,7 +1,5 @@
-package com.stwcoding.ktothelper
+package com.stwcoding.networkmodule.ktothelper
 
-import com.stwcoding.networkmodule.ktothelper.HttpClientHelper
-import com.stwcoding.networkmodule.ktothelper.createHttpClient
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.request.parameter
 

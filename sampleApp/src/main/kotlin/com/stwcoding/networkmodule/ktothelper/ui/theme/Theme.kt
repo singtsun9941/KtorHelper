@@ -1,4 +1,4 @@
-package com.stwcoding.ktothelper.ui.theme
+package com.stwcoding.networkmodule.ktothelper.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

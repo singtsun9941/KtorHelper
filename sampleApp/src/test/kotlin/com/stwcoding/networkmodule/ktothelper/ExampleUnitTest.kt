@@ -1,4 +1,4 @@
-package com.stwcoding.ktothelper
+package com.stwcoding.networkmodule.ktothelper
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

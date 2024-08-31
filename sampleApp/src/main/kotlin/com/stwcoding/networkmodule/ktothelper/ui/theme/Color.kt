@@ -1,4 +1,4 @@
-package com.stwcoding.ktothelper.ui.theme
+package com.stwcoding.networkmodule.ktothelper.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
