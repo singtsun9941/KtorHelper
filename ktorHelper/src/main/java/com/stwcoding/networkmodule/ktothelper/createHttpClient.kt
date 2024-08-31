@@ -1,4 +1,4 @@
-package com.stwcoding.baserepo
+package com.stwcoding.networkmodule.ktothelper
 
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
