@@ -1,4 +1,4 @@
-package com.stwcoding.baserepo.model
+package com.stwcoding.networkmodule.ktothelper.model
 
 sealed class NetworkError(errorMsg: String) : Error("Network Error: $errorMsg") {
     class RequestTimeout : NetworkError("Request timeout")

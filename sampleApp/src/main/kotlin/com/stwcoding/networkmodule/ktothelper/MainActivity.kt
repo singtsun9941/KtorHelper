@@ -1,4 +1,4 @@
-package com.stwcoding.baserepo
+package com.stwcoding.networkmodule.ktothelper
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -22,7 +22,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.stwcoding.baserepo.ui.theme.BaseRepoTheme
+import com.stwcoding.networkmodule.ktothelper.ui.theme.BaseRepoTheme
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 

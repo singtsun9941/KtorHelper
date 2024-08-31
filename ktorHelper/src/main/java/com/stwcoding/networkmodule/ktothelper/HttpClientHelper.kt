@@ -1,6 +1,6 @@
-package com.stwcoding.baserepo
+package com.stwcoding.networkmodule.ktothelper
 
-import com.stwcoding.baserepo.model.NetworkError
+import com.stwcoding.networkmodule.ktothelper.model.NetworkError
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.HttpRequestBuilder
