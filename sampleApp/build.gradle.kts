@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.stwcoding.baserepo"
+    namespace = "com.stwcoding.networkmodule.ktothelper"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.stwcoding.baserepo"
+        applicationId = "com.stwcoding.networkmodule.ktothelper"
         minSdk = 31
         targetSdk = 34
         versionCode = 1

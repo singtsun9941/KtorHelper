@@ -22,7 +22,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.stwcoding.networkmodule.ktothelper.ui.theme.BaseRepoTheme
+import com.stwcoding.networkmodule.ktothelper.ui.theme.KtorHelperTheme
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
@@ -34,8 +34,8 @@ class MainActivity : ComponentActivity() {
         val state = MutableStateFlow("")
         setContent {
             val scope = rememberCoroutineScope()
-            
-            BaseRepoTheme {
+
+            KtorHelperTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     val test = InsultCensorClient()
                     val response by state.collectAsState()
@@ -88,7 +88,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    BaseRepoTheme {
+    KtorHelperTheme {
         Greeting("Android")
     }
 }
