@@ -61,8 +61,11 @@ abstract class HttpClientHelper(
     protected suspend inline fun <reified T> HttpResponse.getResult() =
         when (val statusCode = status.value) {
             in 200..299 -> {
-                val responseBody = body<T>()
-                Result.success(responseBody)
+                try {
+                    Result.success(body<T>())
+                } catch (exception: Exception) {
+                    Result.failure(exception)
+                }
             }
 
             401 -> Result.failure(NetworkError.Unauthorized())
