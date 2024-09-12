@@ -5,6 +5,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.request
+import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpMethod
 import kotlinx.serialization.SerializationException
 import java.nio.channels.UnresolvedAddressException
@@ -54,9 +55,13 @@ abstract class HttpClientHelper(
             return Result.failure(NetworkError.Serialization())
         }
 
-        return when (val statusCode = response.status.value) {
+        return response.getResult()
+    }
+
+    protected suspend inline fun <reified T> HttpResponse.getResult() =
+        when (val statusCode = status.value) {
             in 200..299 -> {
-                val responseBody = response.body<T>()
+                val responseBody = body<T>()
                 Result.success(responseBody)
             }
 
@@ -67,5 +72,4 @@ abstract class HttpClientHelper(
             in 500..599 -> Result.failure(NetworkError.ServerError(statusCode))
             else -> Result.failure(NetworkError.Unknown(statusCode))
         }
-    }
 }
