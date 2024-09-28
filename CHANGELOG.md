@@ -19,5 +19,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Change
 
 - separate status code handling
+- separate request error handling
 
 ### Fix
