@@ -72,7 +72,7 @@ abstract class HttpClientHelper(
             else -> Result.failure(NetworkError.Unknown(statusCode))
         }
 
-    protected fun <T> handleServerError(response: HttpResponse): Result<T> {
+    protected open fun <T> handleServerError(response: HttpResponse): Result<T> {
         return Result.failure(NetworkError.ServerError(response.status.value))
     }
 }
