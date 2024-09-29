@@ -26,7 +26,7 @@ publishing {
             from(components["java"])
             groupId = "com.stwcoding.networkmodule"
             artifactId = "ktorhelper"
-            version = "1.0.0"
+            version = "1.1.0-SNAPSHOT"
 
             pom {
                 name = "Ktor Helper"
@@ -47,16 +47,18 @@ publishing {
         }
     }
     repositories {
-        maven {
-            url = uri(System.getenv("MY_MAVEN_REPO_PATH"))
-        }
+        if (!version.toString().endsWith("SNAPSHOT")) {
+            maven {
+                url = uri(System.getenv("MY_MAVEN_REPO_PATH"))
+            }
 
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/singtsun9941/KtorHelper")
-            credentials {
-                username = System.getenv("GITHUB_USERNAME")
-                password = System.getenv("GITHUB_PUBLISH_TOKEN")
+            maven {
+                name = "GitHubPackages"
+                url = uri("https://maven.pkg.github.com/singtsun9941/KtorHelper")
+                credentials {
+                    username = System.getenv("GITHUB_USERNAME")
+                    password = System.getenv("GITHUB_PUBLISH_TOKEN")
+                }
             }
         }
     }
