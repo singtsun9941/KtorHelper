@@ -20,5 +20,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - separate status code handling
 - separate request error handling
+- request api in io dispatcher
 
 ### Fix
