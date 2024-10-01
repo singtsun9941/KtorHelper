@@ -8,16 +8,20 @@ import io.ktor.client.request.request
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpMethod
 import io.ktor.util.network.UnresolvedAddressException
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.SerializationException
 
 abstract class HttpClientHelper(
     protected val httpClient: HttpClient,
+    protected val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     protected val getRequestBuilder: HttpRequestBuilder.() -> Unit = {},
     protected val postRequestBuilder: HttpRequestBuilder.() -> Unit = {}
 ) {
     protected suspend inline fun <reified T> get(
         path: String,
-        block: HttpRequestBuilder.() -> Unit = {}
+        crossinline block: HttpRequestBuilder.() -> Unit = {}
     ): Result<T> =
         request(
             httpMethod = HttpMethod.Get,
@@ -29,7 +33,7 @@ abstract class HttpClientHelper(
 
     protected suspend inline fun <reified T> post(
         path: String,
-        block: HttpRequestBuilder.() -> Unit = {}
+        crossinline block: HttpRequestBuilder.() -> Unit = {}
     ): Result<T> =
         request(
             httpMethod = HttpMethod.Post,
@@ -42,14 +46,16 @@ abstract class HttpClientHelper(
     protected suspend inline fun <reified T> request(
         httpMethod: HttpMethod,
         path: String,
-        block: HttpRequestBuilder.() -> Unit = {}
-    ): Result<T> =
+        crossinline block: HttpRequestBuilder.() -> Unit = {}
+    ): Result<T> = withContext(ioDispatcher) {
         handleRequest {
             httpClient.request(path) {
                 method = httpMethod
                 block()
             }
         }
+    }
+
 
     protected suspend inline fun <reified T> handleRequest(block: () -> HttpResponse) = try {
         block().getStatusCodeResult<T>()
