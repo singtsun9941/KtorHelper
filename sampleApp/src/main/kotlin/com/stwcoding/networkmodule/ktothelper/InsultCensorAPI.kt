@@ -4,7 +4,7 @@ import com.stwcoding.networkmodule.ktothelper.model.API
 import com.stwcoding.networkmodule.ktothelper.model.request.Platform
 
 object InsultCensorAPI : KtorAPI(
-    createHttpClient(
+    HttpClientConfig(
         platform = Platform.ANDROID,
         domain = "https://www.purgomalum.com"
     )

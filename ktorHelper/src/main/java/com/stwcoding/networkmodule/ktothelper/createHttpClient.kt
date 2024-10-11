@@ -10,36 +10,36 @@ import io.ktor.client.plugins.logging.Logging
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
-fun createHttpClient(
-    platform: Platform,
-    domain: String,
-    isShowLog: Boolean = true,
-): HttpClient {
-    return HttpClient(platform.toKtorEngine()) {
-        defaultRequest {
-            url(domain)
-        }
+data class HttpClientConfig(
+    val platform: Platform,
+    val domain: String,
+    val isShowLog: Boolean = true,
+)
 
-        if (isShowLog) {
-            install(Logging) {
-                level = LogLevel.ALL
+fun HttpClientConfig.createHttpClient() = HttpClient(platform.toKtorEngine()) {
+    defaultRequest {
+        url(domain)
+    }
+
+    if (isShowLog) {
+        install(Logging) {
+            level = LogLevel.ALL
+        }
+    }
+
+    install(ContentNegotiation) {
+        json(
+            json = Json {
+                ignoreUnknownKeys = true
             }
-        }
+        )
+    }
 
-        install(ContentNegotiation) {
-            json(
-                json = Json {
-                    ignoreUnknownKeys = true
-                }
-            )
-        }
-
-        // TODO https://ktor.io/docs/client-bearer-auth.html
+    // TODO https://ktor.io/docs/client-bearer-auth.html
 //        install(Auth){
 //            bearer{
 //                loadToken{}
 //                refreshTokens{}
 //            }
 //        }
-    }
 }

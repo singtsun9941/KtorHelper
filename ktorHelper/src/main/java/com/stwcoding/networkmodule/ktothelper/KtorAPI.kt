@@ -13,6 +13,7 @@ import kotlinx.serialization.SerializationException
 abstract class KtorAPI(
     protected val httpClient: HttpClient,
 ) {
+    constructor(httpClientConfig: HttpClientConfig) : this(httpClientConfig.createHttpClient())
 
     protected suspend inline fun <reified T> request(
         path: String,
