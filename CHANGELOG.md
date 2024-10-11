@@ -23,5 +23,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - separate status code handling
 - separate request error handling
 - add request response api abstract
+- update request model
 
 ### Fix
