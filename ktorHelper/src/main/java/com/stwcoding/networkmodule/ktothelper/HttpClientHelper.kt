@@ -1,53 +1,26 @@
 package com.stwcoding.networkmodule.ktothelper
 
+import com.stwcoding.networkmodule.ktothelper.extensions.handleRequest
 import com.stwcoding.networkmodule.ktothelper.model.NetworkError
+import com.stwcoding.networkmodule.ktothelper.model.request.Request
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
-import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.request
 import io.ktor.client.statement.HttpResponse
-import io.ktor.http.HttpMethod
 import io.ktor.util.network.UnresolvedAddressException
 import kotlinx.serialization.SerializationException
 
 abstract class HttpClientHelper(
     protected val httpClient: HttpClient,
-    protected val getRequestBuilder: HttpRequestBuilder.() -> Unit = {},
-    protected val postRequestBuilder: HttpRequestBuilder.() -> Unit = {}
 ) {
-    protected suspend inline fun <reified T> get(
-        path: String,
-        block: HttpRequestBuilder.() -> Unit = {}
-    ): Result<T> =
-        request(
-            httpMethod = HttpMethod.Get,
-            path = path,
-        ) {
-            getRequestBuilder()
-            block()
-        }
-
-    protected suspend inline fun <reified T> post(
-        path: String,
-        block: HttpRequestBuilder.() -> Unit = {}
-    ): Result<T> =
-        request(
-            httpMethod = HttpMethod.Post,
-            path = path,
-        ) {
-            postRequestBuilder()
-            block()
-        }
 
     protected suspend inline fun <reified T> request(
-        httpMethod: HttpMethod,
         path: String,
-        block: HttpRequestBuilder.() -> Unit = {}
+        request: Request,
     ): Result<T> =
         handleRequest {
             httpClient.request(path) {
-                method = httpMethod
-                block()
+                handleRequest(request)
             }
         }
 
