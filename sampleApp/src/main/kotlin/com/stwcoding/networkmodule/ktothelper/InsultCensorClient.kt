@@ -1,17 +1,11 @@
 package com.stwcoding.networkmodule.ktothelper
 
-import io.ktor.client.engine.okhttp.OkHttp
-import io.ktor.client.request.parameter
-
-class InsultCensorClient : HttpClientHelper(
-    createHttpClient(
-        engine = OkHttp.create(), // Darwin for ios
-        domain = "https://www.purgomalum.com"
-    )
-) {
+class InsultCensorClient {
     suspend fun censorWords(uncensored: String): Result<CensorWordsResponse> {
-        return get("service/json") {
-            parameter("text", uncensored)
-        }
+        return InsultCensorAPI.censorWordsAPI.sendRequest(
+            request = CensorWordsRequest(
+                text = uncensored
+            )
+        )
     }
 }

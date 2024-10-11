@@ -69,6 +69,5 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    implementation(libs.ktor.client.okhttp)
     implementation(libs.kotlinx.serialization.json)
 }
