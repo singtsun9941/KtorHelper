@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Add
 
+- Path Segments handling
+
 ### Change
 
 - separate status code handling
