@@ -10,7 +10,7 @@ import io.ktor.client.statement.HttpResponse
 import io.ktor.util.network.UnresolvedAddressException
 import kotlinx.serialization.SerializationException
 
-abstract class HttpClientHelper(
+abstract class KtorAPI(
     protected val httpClient: HttpClient,
 ) {
 
