@@ -1,5 +1,6 @@
 package com.stwcoding.networkmodule.ktothelper
 
+import com.stwcoding.networkmodule.ktothelper.model.Response
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -7,4 +8,4 @@ import kotlinx.serialization.Serializable
 data class CensorWordsResponse(
     @SerialName("result")
     val result: String = ""
-)
+) : Response
